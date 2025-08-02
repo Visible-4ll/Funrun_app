@@ -1,0 +1,17 @@
+.bdy{
+    background-color: azure;
+}
+
+.btn-primary{
+    background-color: #d2e902;
+    color: white;
+    border: none;
+    font-weight: bold;
+
+}
+.btn-success{
+    background-color: #1E1EBA;
+    color: white;
+    border: none;
+    font-weight: bold;
+}

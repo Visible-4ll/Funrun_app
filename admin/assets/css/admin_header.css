@@ -1,0 +1,50 @@
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    color: white;
+    padding: 1rem;
+    flex-wrap: wrap;
+}
+
+.admin-header h1 {
+    font-size: 1.5rem;
+}
+
+
+.admin-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .burger {
+    display: block;
+    }
+
+    .admin-nav {
+    width: 100%;
+    display: none;
+    }
+
+    .admin-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+    background: #444;
+    }
+
+    .admin-nav.show {
+    display: block;
+    }
+}

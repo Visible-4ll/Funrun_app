@@ -1,0 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 1px;
+  background-color: #d2e902;
+ 
+}
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+padding-right: 30px;
+}
+.bg-dark {
+  background-color: #1E1EBA !important;
+}
+
+.event-header {
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  text-align: center;
+  background-color: #d2e902;
+  transition: all 0.3s ease;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+}
+.event-header.scrolled {
+  background-color: #d2e902; /* color after scroll */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); /* optional */
+}
+
+.sticky-active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Optional spacing for main content to prevent overlap */
+main {
+  margin-top: 100px;
+  overflow: hidden;
+}
+.event-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(59, 59, 59, 0.1);
+}
+
+.event-timer h2 {
+  margin: 0.5rem 0;
+}
+.even-timer h2:hover {
+  color: #fefeff; /* Change color on hover */
+}
+#countdown {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1px;
+
+}
+
+#countdown span {
+  min-width: 50px;
+  padding: 5px;
+  font-size: 1.0rem;
+  font-weight: bold;
+  background-color: #1E1EBA;
+  border-radius: 5px;
+  text-align: center;
+  color: #fefeff;
+}
+
+#countdown span::after {
+  content: attr(data-label);
+  display: block;
+  font-size: 0.6em;
+  font-weight: normal;
+  background-color: #d2e902;
+}
+
+#logo_event {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+  #countdown span {
+      min-width: 40px;
+      padding: 3px;
+      font-size: 0.8rem;
+  }
+  
+  .event-timer h2 {
+      font-size: 1.2rem;
+  }
+}
