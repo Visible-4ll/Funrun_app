@@ -22,15 +22,15 @@ PHP 7.4 or higher
 
 MySQL 5.7 or higher
 
-Web server (Apache, Nginx)
+Web server (Apache)
 
 Composer (for dependency management)
 
 Installation Guide
 1. Clone the Repository
 bash
-git clone https://github.com/installersph/funrun-registration.git
-cd funrun-registration
+git clone https://github.com/installersph/funrun_app.git
+cd funrun_app
 2. Install Dependencies
 bash
 composer install
@@ -50,7 +50,7 @@ USE funrun_db;
 Copy the sample configuration file and update with your details:
 
 bash
-cp config/config.sample.php config/config.php
+cp config/config.php config/config.php
 Edit config/config.php with your database credentials:
 
 php
@@ -68,27 +68,7 @@ chmod -R 755 uploads
 Apache
 Create a virtual host pointing to the public directory.
 
-Nginx
-Sample configuration:
 
-nginx
-server {
-    listen 80;
-    server_name funrun.local;
-    root /path/to/funrun-registration/public;
-    
-    index index.php;
-    
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-    
-    location ~ \.php$ {
-        include fastcgi_params;
-        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-}
 7. QR Code Library
 Download the PHP QR Code library:
 
@@ -158,6 +138,7 @@ This project is proprietary software developed by JohnDev404. All rights reserve
 Support
 For technical support, please contact:
 
-Email: techsupport@installers.ph
+Email: installersph@gmail.com
 
-Phone: +63 481870374
+Phone: +63 09481870374
+
