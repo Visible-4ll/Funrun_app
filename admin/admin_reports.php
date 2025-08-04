@@ -13,9 +13,9 @@ try {
     
     // Daily registration trend
     $stmt = $pdo->query("SELECT DATE(registration_date) as date, COUNT(*) as count 
-                         FROM participants 
-                         GROUP BY DATE(registration_date) 
-                         ORDER BY date");
+                            FROM participants 
+                            GROUP BY DATE(registration_date) 
+                            ORDER BY date");
     $dailyTrend = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     // Gender distribution
@@ -25,6 +25,14 @@ try {
     // Shirt size distribution
     $stmt = $pdo->query("SELECT shirt_size, COUNT(*) as count FROM participants GROUP BY shirt_size");
     $shirtStats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt = $pdo->query("SELECT SUM(price) as total_revenue, AVG(price) as avg_price FROM participants");
+    $priceStats = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Price breakdown by distance
+    $stmt = $pdo->query("SELECT distance, SUM(price) as total FROM participants GROUP BY distance");
+    $priceByDistance = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
@@ -41,214 +49,9 @@ logAdminActivity("Viewed reports");
     <title>Reports - Running Event</title>
     <link rel="stylesheet" href="admin_styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/admin_reports.css">
 </head>
-<style>
-/* Admin Reports CSS */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f7fa;
-    color: #333;
-    line-height: 1.6;
-}
-
-.admin-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-h1 {
-    color: #2c3e50;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #ecf0f1;
-}
-
-h2 {
-    color: #3498db;
-    margin: 25px 0 15px;
-}
-
-.report-section {
-    margin-bottom: 40px;
-}
-
-.report-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.report-card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    border-left: 4px solid #3498db;
-}
-
-.report-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.report-card h3 {
-    color: #2c3e50;
-    margin-top: 0;
-    font-size: 1.1rem;
-}
-
-.report-number {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #3498db;
-    margin: 10px 0 5px;
-}
-
-.report-detail {
-    color: #7f8c8d;
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-.chart-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.chart-container {
-    position: relative;
-    height: 300px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.report-actions {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
-}
-
-.export-btn {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-}
-
-.export-btn:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    .report-cards {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-    
-    .chart-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .admin-container {
-        padding: 15px;
-        margin: 10px;
-    }
-    
-    .report-cards {
-        grid-template-columns: 1fr;
-    }
-    
-    .chart-container {
-        height: 250px;
-    }
-    
-    .report-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .export-btn {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    h2 {
-        font-size: 1.3rem;
-    }
-    
-    .report-card {
-        padding: 15px;
-    }
-    
-    .report-number {
-        font-size: 1.5rem;
-    }
-    
-    .chart-container {
-        height: 220px;
-        padding: 10px;
-    }
-}
-
-/* Print styles */
-@media print {
-    body {
-        background: none;
-        color: #000;
-    }
-    
-    .admin-container {
-        box-shadow: none;
-        padding: 0;
-        max-width: 100%;
-    }
-    
-    .report-card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-        page-break-inside: avoid;
-    }
-    
-    .chart-container {
-        page-break-inside: avoid;
-        height: auto;
-        min-height: 300px;
-    }
-    
-    .report-actions {
-        display: none;
-    }
-}
-</style>
+ 
 <body>
     <?php include 'admin_header.php'; ?>
     
@@ -317,13 +120,24 @@ h2 {
                     <canvas id="shirtSizeChart"></canvas>
                 </div>
             </div>
+
+            <div class="chart-row">
+                <div class="chart-container">
+                    <canvas id="priceByDistanceChart"></canvas>
+                </div>
         </div>
+
+        
         
         <div class="report-actions">
             <a href="export_report.php?type=full" class="export-btn">Export Full Report</a>
             <a href="export_report.php?type=summary" class="export-btn">Export Summary</a>
         </div>
+
+
     </div>
+
+  
 
     <script>
         // Distance Chart
@@ -405,6 +219,8 @@ h2 {
             }
         });
 
+        
+
         // Gender Chart
         const genderCtx = document.getElementById('genderChart').getContext('2d');
         new Chart(genderCtx, {
@@ -455,6 +271,31 @@ h2 {
                 }
             }
         });
+       
+        const priceCtx = document.getElementById('priceByDistanceChart').getContext('2d');
+new Chart(priceCtx, {
+    type: 'bar',
+    data: {
+        labels: <?= json_encode(array_column($priceByDistance, 'distance')) ?>,
+        datasets: [{
+            label: 'Total Revenue (₱)',
+            data: <?= json_encode(array_map('floatval', array_column($priceByDistance, 'total'))) ?>,
+            backgroundColor: 'rgba(255, 159, 64, 0.7)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Revenue by Distance'
+            }
+        }
+    }
+});
+        
     </script>
 </body>
 </html>

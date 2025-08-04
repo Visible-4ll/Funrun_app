@@ -8,7 +8,7 @@
     <a href="http://10.0.16.46/funrunapplication-main/Search.php"><img src="assets/img/installersph.png" style="height: auto; width: 120px"></img></a>
   </div>
 
-  <div id="countdown" class="d-flex justify-content-center gap-1 fs-5">
+  <div id="countdown" class="d-flex justify-content-center gap-0.5 fs-5 align-items-center ">
     <span><strong id="event-title">TIme until the event Started</strong></span>
     <span><strong id="days">00</strong>d</span>
     <span><strong id="hours">00</strong>h</span>
@@ -26,7 +26,7 @@ function updateCountdown() {
 
   if (diff < 0) {
     document.getElementById("countdown").innerHTML = `
-      <div class="alert alert-success mt-3"">
+      <div class="alert alert-success mt-3 text-center" role="alert margin-top: 20px;">
         THE MARATHON HAS STARTED!
       </div>`;
     return;

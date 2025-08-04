@@ -72,7 +72,7 @@ $totalPages = ceil($total / $perPage);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Participants - Running Event</title>
-    <link rel="stylesheet" href="admin_styles.css">
+    <link rel="stylesheet" href="assets/css/admin_styles.css">
 </head>
 
 <body>
@@ -128,6 +128,7 @@ $totalPages = ceil($total / $perPage);
                     <th>Date</th>
                     <th>Status</th>
                     <th>transaction_number</th>
+                    <th>Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -143,6 +144,7 @@ $totalPages = ceil($total / $perPage);
                     <td><?= date('M j, Y', strtotime($participant['registration_date'])) ?></td>
                     <td><?= htmlspecialchars($participant['payment_status']) ?></td>
                     <td><?= htmlspecialchars($participant['transaction_number']) ?></td>
+                    <td><?= htmlspecialchars($participant['price']) ?></td>
                     <td class="actions">
                         <a href="admin_view_participant.php?id=<?= $participant['id'] ?>" class="view-btn">View</a>
                         <a href="admin_edit_participant.php?id=<?= $participant['id'] ?>" class="edit-btn">Edit</a>

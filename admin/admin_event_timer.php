@@ -34,7 +34,7 @@ $currentEventDate = getEventSetting('event_date', '2024-12-31 08:00:00');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event Timer</title>
-    <link rel="stylesheet" href="admin_styles.css">
+    <link rel="stylesheet" href="assets/css/admin_styles.css">
     <style>
         .event-date-form {
             max-width: 500px;

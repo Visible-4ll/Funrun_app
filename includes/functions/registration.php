@@ -11,7 +11,8 @@ if (!isset($_SESSION['registration_data'])) {
         'shirt_size' => '',
         'payment_method' => '',
         'agreement1' => false,
-        'agreement2' => false
+        'agreement2' => false,
+        'price' => 0.00
     ];
 }
 
@@ -24,8 +25,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         switch ($submittedStep) {
             case 1:
-                $_SESSION['registration_data']['distance'] = $_POST['distance'] ?? '';
+                $distance = $_POST['distance'] ?? '';
+                $_SESSION['registration_data']['distance'] = $distance;
+
+                switch ($distance) {
+                    case '3Km':
+                        $_SESSION['registration_data']['price'] = 800;
+                        break;
+                    case '6Km':
+                        $_SESSION['registration_data']['price'] = 1200;
+                        break;
+                    case '12Km':
+                        $_SESSION['registration_data']['price'] = 2500;
+                        break;
+                    default:
+                        $_SESSION['registration_data']['price'] = 0;
+                        break;
+                }
                 break;
+
             case 2:
                 $_SESSION['registration_data']['full_name'] = $_POST['full_name'] ?? '';
                 $_SESSION['registration_data']['gender'] = $_POST['gender'] ?? '';
@@ -35,12 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['registration_data']['emergency_contact'] = $_POST['emergency_contact'] ?? '';
                 $_SESSION['registration_data']['shirt_size'] = $_POST['shirt_size'] ?? '';
                 break;
+
             case 3:
                 if (empty($_POST['payment_method'])) {
                     die("Please select a payment method");
                 }
                 $_SESSION['registration_data']['payment_method'] = $_POST['payment_method'];
                 break;
+
             case 4:
                 $_SESSION['registration_data']['agreement1'] = isset($_POST['agreement1']);
                 $_SESSION['registration_data']['agreement2'] = isset($_POST['agreement2']);
@@ -51,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $pdo->prepare("INSERT INTO participants (
                         distance, full_name, gender, home_address, email, 
                         phone_number, emergency_contact, shirt_size, payment_method,
-                        agreement1, agreement2, payment_status, transaction_number
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    
+                        agreement1, agreement2, payment_status, transaction_number, price
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
                     $stmt->execute([
                         $_SESSION['registration_data']['distance'],
                         $_SESSION['registration_data']['full_name'],
@@ -67,7 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['registration_data']['agreement1'],
                         $_SESSION['registration_data']['agreement2'],
                         'Unpaid',
-                        $transaction_number
+                        $transaction_number,
+                        $_SESSION['registration_data']['price']
                     ]);
 
                     $registrationId = $pdo->lastInsertId();
@@ -95,12 +116,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['participant_distance'] = $participant['distance'];
                     $_SESSION['transaction_number'] = $transaction_number;
 
+                    header('Location: index.php?step=5');
+                    exit;
+
                 } catch (PDOException $e) {
                     die("Registration failed: " . $e->getMessage());
                 }
-
-                header('Location: index.php?step=5');
-                exit;
         }
 
         if ($submittedStep < 4) {

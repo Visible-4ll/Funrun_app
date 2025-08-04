@@ -42,11 +42,14 @@
                         <form method="post" class="text-center">
                             <input type="hidden" name="step" value="1">
                             <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
-                                <button type="submit" name="distance" value="3Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '3Km' ? 'btn-primary' : 'btn-outline-primary' ?>">3Km</button>
-                                <button type="submit" name="distance" value="6Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '6Km' ? 'btn-primary' : 'btn-outline-primary' ?>">6Km</button>
-                                <button type="submit" name="distance" value="12Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '12Km' ? 'btn-primary' : 'btn-outline-primary' ?>">12Km</button>
+                                <button type="submit" name="distance" value="3Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '3Km' ? 'btn-primary' : 'btn-outline-primary' ?>">3Km - 800</button>
+                                <button type="submit" name="distance" value="6Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '6Km' ? 'btn-primary' : 'btn-outline-primary' ?>">6Km - 1200</button>
+                                <button type="submit" name="distance" value="12Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '12Km' ? 'btn-primary' : 'btn-outline-primary' ?>">12Km - 2500</button>
                             </div>
                         </form>
+                        <?php if (!empty($_SESSION['registration_data']['price'])): ?>
+        <p class="fs-5 fw-semibold text-success">Selected Price: ₱<?= $_SESSION['registration_data']['price']; ?></p>
+    <?php endif; ?>
                     </div>
 
                     <!-- Step 2: Registration -->

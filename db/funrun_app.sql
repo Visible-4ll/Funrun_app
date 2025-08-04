@@ -14,7 +14,10 @@ CREATE TABLE IF NOT EXISTS participants (
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     agreement1 BOOLEAN DEFAULT FALSE,
     agreement2 BOOLEAN DEFAULT FALSE,
-    qr_code_path VARCHAR(255)
+    qr_code_path VARCHAR(255),
+    payment_status ENUM('Paid', 'Unpaid') DEFAULT 'Unpaid',
+    transaction_number VARCHAR(50) DEFAULT NULL,
+
 );
 
 -- Create payment methods table
@@ -49,12 +52,9 @@ CREATE TABLE IF NOT EXISTS admin_logs (
 
 -- Insert default payment methods
 INSERT INTO payment_methods (method_name) VALUES 
-('GCASH'), 
-('Bank Payment'), 
-('Google/Apple Pay'), 
-('MAYA'), 
-('Counter Payment'), 
-('7/11');
+('CASH'), 
+('GCASH')
+
 
 -- Insert default admin user (password: admin123)
 INSERT INTO admin_users (username, password_hash, full_name, email) 
