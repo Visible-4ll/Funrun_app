@@ -29,7 +29,7 @@ Composer (for dependency management)
 Installation Guide
 1. Clone the Repository
 bash
-git clone https://github.com/installersph/funrun_app.git
+git clone https://github.com/Visible-4II/Funrun_app.git
 cd funrun_app
 2. Install Dependencies
 bash
@@ -141,5 +141,6 @@ For technical support, please contact:
 Email: installersph@gmail.com
 
 Phone: +63 09481870374
+
 
 
