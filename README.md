@@ -6,12 +6,19 @@ A web-based application for managing participant registrations for running event
 
 Features
 ✅ Multi-step registration form
+
 ✅ Distance selection (3Km, 6Km, 12Km) with pricing
+
 ✅ Participant information collection (name, contact, etc.)
+
 ✅ Payment method selection
+
 ✅ QR code generation for event access
+
 ✅ Countdown timer to event date
+
 ✅ Responsive design (works on mobile & desktop)
+
 ✅ Admin dashboard for managing registrations
 
 System Requirements
@@ -109,23 +116,32 @@ Check PHP session directory permissions.
 
 Security Recommendations
 🔒 Change default admin credentials
+
 🔒 Set proper file permissions:
 
 bash
 chmod 644 config/config.php
+
 🔒 Use HTTPS in production
+
 🔒 Regularly backup the database
 
 License
+
 ⚠️ Proprietary Software © JohnDev404. All rights reserved.
 
 Support
+
 📧 Email: installersph@gmail.com
+
 📞 Phone/Viber: +639618856615
+
 🌐 Facebook: InstallersPH
+
 🔗 Website: https://installersph.com
 
 Notes
 For large events, optimize MySQL settings.
 
 Test payment gateways thoroughly before production.
+
