@@ -5,7 +5,7 @@ The FunRun Registration System is a web-based application designed to manage par
 Features
 Multi-step registration form
 
-Distance selection (3Km, 6Km, 12Km)
+Distance selection (3Km, 6Km, 12Km) with Price
 
 Participant information collection
 
@@ -141,4 +141,5 @@ For technical support, please contact:
 Email: installersph@gmail.com
 
 Phone: +63 09481870374
+
 
