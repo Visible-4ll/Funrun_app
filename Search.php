@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['search'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/header.css">
+  <link rel="stylesheet" href="assets/css/search.css">
   <?php require_once 'includes/countdown.php';?>
 </head>
 <body class="bdy d-flex flex-column min-vh-100">

@@ -1,5 +1,6 @@
     <?php
     include_once 'includes/functions/registration.php';
+    include_once 'includes/functions/maskname.php';
 
     ?>
 
@@ -42,9 +43,9 @@
                         <form method="post" class="text-center">
                             <input type="hidden" name="step" value="1">
                             <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
-                                <button type="submit" name="distance" value="3Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '3Km' ? 'btn-primary' : 'btn-outline-primary' ?>">3Km - 800</button>
-                                <button type="submit" name="distance" value="6Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '6Km' ? 'btn-primary' : 'btn-outline-primary' ?>">6Km - 1200</button>
-                                <button type="submit" name="distance" value="12Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '12Km' ? 'btn-primary' : 'btn-outline-primary' ?>">12Km - 2500</button>
+                                <button type="submit" name="distance" value="3Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '3Km' ? 'btn-primary' : 'btn-outline-primary' ?>">3Km - ₱800</button>
+                                <button type="submit" name="distance" value="6Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '6Km' ? 'btn-primary' : 'btn-outline-primary' ?>">6Km - ₱1200</button>
+                                <button type="submit" name="distance" value="12Km" class="distance-btn btn btn-lg <?= $_SESSION['registration_data']['distance'] == '12Km' ? 'btn-primary' : 'btn-outline-primary' ?>">12Km - ₱2500</button>
                             </div>
                         </form>
                         <?php if (!empty($_SESSION['registration_data']['price'])): ?>
@@ -60,11 +61,11 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="full_name" class="form-label">Full name</label>
-                                    <input type="text" class="form-control" id="full_name" name="full_name" value="<?= htmlspecialchars($_SESSION['registration_data']['full_name']) ?>" required>
+                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Full Name" value="<?= htmlspecialchars($_SESSION['registration_data']['full_name']) ?>" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="gender" class="form-label">Gender</label>
-                                    <select class="form-select" id="gender" name="gender" required>
+                                    <select class="form-select" id="gender" name="gender" placeholder="Gender" required>
                                         <option value="">Select</option>
                                         <option value="Male" <?= $_SESSION['registration_data']['gender'] == 'Male' ? 'selected' : '' ?>>Male</option>
                                         <option value="Female" <?= $_SESSION['registration_data']['gender'] == 'Female' ? 'selected' : '' ?>>Female</option>
@@ -75,17 +76,17 @@
                             
                             <div class="mb-3">
                                 <label for="home_address" class="form-label">Home Address</label>
-                                <textarea class="form-control" id="home_address" name="home_address" rows="3" required><?= htmlspecialchars($_SESSION['registration_data']['home_address']) ?></textarea>
+                                <textarea class="form-control" id="home_address" name="home_address" placeholder="Home Address" rows="3" required><?= htmlspecialchars($_SESSION['registration_data']['home_address']) ?></textarea>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($_SESSION['registration_data']['email']) ?>" required>
+                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" value="<?= htmlspecialchars($_SESSION['registration_data']['email']) ?>" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="phone_number" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone_number" name="phone_number" minlength="11" maxlength="11" 
+                                    <input type="tel" class="form-control" id="phone_number" placeholder="Phone Number" name="phone_number" minlength="11" maxlength="11" 
         pattern="\d{11}" 
         required 
         placeholder="Enter 11-digit number" value="<?= htmlspecialchars($_SESSION['registration_data']['phone_number']) ?>" required>
@@ -94,7 +95,7 @@
                             
                             <div class="mb-3">
                                 <label for="emergency_contact" class="form-label">Emergency Contact</label>
-                                                <input type="text" class="form-control" id="emergency_contact" name="emergency_contact" minlength="11" maxlength="11" 
+                                                <input type="text" class="form-control" id="emergency_contact" placeholder="Emergency Contact" name="emergency_contact" minlength="11" maxlength="11" 
                         pattern="\d{11}" 
                         required 
                         placeholder="Enter 11-digit number" value="<?= htmlspecialchars($_SESSION['registration_data']['emergency_contact']) ?>" required>
@@ -210,8 +211,12 @@
                 </p>
 
                 <!-- Participant Info -->
-                <p class="card-text"><strong>Name:</strong> <?= htmlspecialchars($_SESSION['participant_name'] ?? '') ?></p>
-                <h3 class="card-text">Transaction #: <?= htmlspecialchars($_SESSION['transaction_number'] ?? 'N/A') ?></h3>
+                <p class="card-text"><strong>Name:</strong> 
+                    <?= htmlspecialchars(maskName($_SESSION['participant_name'] ?? '')) ?>
+                    </p>
+
+                <h3 class="card-text">Transaction #: <?= htmlspecialchars($_SESSION['transaction_number'] ?? 'N/A') ?>
+                    </h3>
 
                 <!-- QR Code -->
                 <?php if (isset($_SESSION['qr_code'])): ?>

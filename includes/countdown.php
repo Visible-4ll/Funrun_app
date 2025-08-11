@@ -5,7 +5,7 @@
 <!-- Countdown HTML Block -->
 <div class="event-header " style="height: 100px;">
   <div class="logo-container ">
-    <a href="http://10.0.16.46/funrunapplication-main/Search.php"><img src="assets/img/installersph.png" style="height: auto; width: 120px"></img></a>
+    <a href="https://localhost/funrunapplication-main/Search.php"><img src="assets/img/installersph.png" style="height: auto; width: 120px"></img></a>
   </div>
 
   <div id="countdown" class="d-flex justify-content-center gap-0.5 fs-5 align-items-center ">

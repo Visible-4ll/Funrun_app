@@ -39,24 +39,20 @@ if (!empty($conditions)) {
     $countQuery .= " WHERE " . implode(" AND ", $conditions);
 }
 
-// Add sorting and pagination
 $query .= " ORDER BY registration_date DESC LIMIT $perPage OFFSET $offset";
 
 try {
-    // Get participants
     $stmt = $pdo->prepare($query);
     $stmt->execute($params);
     $participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    // Get total count
+
     $stmt = $pdo->prepare($countQuery);
     $stmt->execute($params);
     $total = $stmt->fetchColumn();
-    
-    // Get unique distances and payment methods for filters
+
     $stmt = $pdo->query("SELECT DISTINCT distance FROM participants");
     $distances = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    
+
     $stmt = $pdo->query("SELECT DISTINCT payment_method FROM participants");
     $paymentMethods = $stmt->fetchAll(PDO::FETCH_COLUMN);
 } catch (PDOException $e) {
@@ -70,17 +66,20 @@ $totalPages = ceil($total / $perPage);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Participants - Running Event</title>
-    <link rel="stylesheet" href="assets/css/admin_styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/admin_participants.css">
+    <style>
+
+    </style>
 </head>
 
 <body>
     <?php include 'admin_header.php'; ?>
-    
+
     <div class="admin-container">
         <h1>Manage Participants</h1>
-        
+
         <div class="filters">
             <form method="get" action="admin_participants.php">
                 <div class="form-group">
@@ -110,12 +109,12 @@ $totalPages = ceil($total / $perPage);
                 <a href="admin_participants.php" class="reset-btn">Reset</a>
             </form>
         </div>
-        
+
         <div class="export-actions">
             <a href="export_participants.php?format=csv&search=<?= urlencode($search) ?>&distance=<?= urlencode($distanceFilter) ?>&payment=<?= urlencode($paymentFilter) ?>" class="export-btn">Export to CSV</a>
             <a href="export_participants.php?format=excel&search=<?= urlencode($search) ?>&distance=<?= urlencode($distanceFilter) ?>&payment=<?= urlencode($paymentFilter) ?>" class="export-btn">Export to Excel</a>
         </div>
-        
+
         <table class="participants-table">
             <thead>
                 <tr>
@@ -127,7 +126,7 @@ $totalPages = ceil($total / $perPage);
                     <th>Payment</th>
                     <th>Date</th>
                     <th>Status</th>
-                    <th>transaction_number</th>
+                    <th>Transaction No.</th>
                     <th>Price</th>
                     <th>Actions</th>
                 </tr>
@@ -144,7 +143,7 @@ $totalPages = ceil($total / $perPage);
                     <td><?= date('M j, Y', strtotime($participant['registration_date'])) ?></td>
                     <td><?= htmlspecialchars($participant['payment_status']) ?></td>
                     <td><?= htmlspecialchars($participant['transaction_number']) ?></td>
-                    <td><?= htmlspecialchars($participant['price']) ?></td>
+                    <td>₱<?= htmlspecialchars($participant['price']) ?></td>
                     <td class="actions">
                         <a href="admin_view_participant.php?id=<?= $participant['id'] ?>" class="view-btn">View</a>
                         <a href="admin_edit_participant.php?id=<?= $participant['id'] ?>" class="edit-btn">Edit</a>
@@ -154,16 +153,16 @@ $totalPages = ceil($total / $perPage);
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
+
         <div class="pagination">
             <?php if ($page > 1): ?>
                 <a href="?page=<?= $page-1 ?>&search=<?= urlencode($search) ?>&distance=<?= urlencode($distanceFilter) ?>&payment=<?= urlencode($paymentFilter) ?>" class="page-link">Previous</a>
             <?php endif; ?>
-            
+
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                 <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>&distance=<?= urlencode($distanceFilter) ?>&payment=<?= urlencode($paymentFilter) ?>" class="page-link <?= $i === $page ? 'active' : '' ?>"><?= $i ?></a>
             <?php endfor; ?>
-            
+
             <?php if ($page < $totalPages): ?>
                 <a href="?page=<?= $page+1 ?>&search=<?= urlencode($search) ?>&distance=<?= urlencode($distanceFilter) ?>&payment=<?= urlencode($paymentFilter) ?>" class="page-link">Next</a>
             <?php endif; ?>

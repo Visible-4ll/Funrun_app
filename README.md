@@ -1,144 +1,147 @@
-FunRun Registration System - Installers PH
+FunRun Registration System
+Developed by Installers PH
+
 Overview
-The FunRun Registration System is a web-based application designed to manage participant registrations for running events. This system provides a multi-step registration process, payment tracking, and QR code generation for event participants.
+A web-based application for managing participant registrations for running events. Features include multi-step registration, payment tracking, and QR code generation.
 
 Features
-Multi-step registration form
+✅ Multi-step registration form
 
-Distance selection (3Km, 6Km, 12Km)
+✅ Distance selection (3Km, 6Km, 12Km) with pricing
 
-Participant information collection
+✅ Participant information collection (name, contact, etc.)
 
-Payment method selection
+✅ Payment method selection
 
-QR code generation for participants
+✅ QR code generation for event access
 
-Countdown timer to event date
+✅ Countdown timer to event date
 
-Responsive design for mobile and desktop
+✅ Responsive design (works on mobile & desktop)
+
+✅ Admin dashboard for managing registrations
 
 System Requirements
 PHP 7.4 or higher
 
 MySQL 5.7 or higher
 
-Web server (Apache)
+Apache Web Server
 
 Composer (for dependency management)
 
 Installation Guide
 1. Clone the Repository
 bash
-git clone https://github.com/installersph/funrun_app.git
+git clone https://github.com/Visible-4II/Funrun_app.git
 cd funrun_app
 2. Install Dependencies
 bash
 composer install
 3. Database Setup
-Create a new MySQL database and import the SQL schema:
-
+Option A: Import Schema
 bash
 mysql -u username -p funrun_db < database/schema.sql
-Or run these commands in your MySQL client:
-
+Option B: Manual Setup
 sql
 CREATE DATABASE funrun_db;
 USE funrun_db;
-
--- Create tables (see complete schema in database/schema.sql)
+-- (Run the full schema from database/schema.sql)
 4. Configuration
-Copy the sample configuration file and update with your details:
+Copy the sample config:
 
 bash
-cp config/config.php config/config.php
-Edit config/config.php with your database credentials:
+cp config/config.php.sample config/config.php
+Edit config/config.php with your database details:
 
 php
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'funrun_db');
 define('DB_USER', 'your_username');
 define('DB_PASS', 'your_password');
-5. Directory Permissions
-Ensure these directories are writable by the web server:
-
+5. Set Directory Permissions
 bash
-chmod -R 755 assets/qrcodes
-chmod -R 755 uploads
-6. Web Server Configuration
-Apache
-Create a virtual host pointing to the public directory.
+chmod -R 755 assets/qrcodes uploads
+6. Web Server Setup (Apache)
+Point the virtual host to the public directory.
 
+Ensure mod_rewrite is enabled.
 
-7. QR Code Library
-Download the PHP QR Code library:
-
+7. Install QR Code Library
 bash
 mkdir -p phpqrcode
 wget https://raw.githubusercontent.com/t0k4rt/phpqrcode/master/qrlib.php -O phpqrcode/qrlib.php
 Usage
-Access the system through your web browser
+Registration Process
+Select distance (3Km, 6Km, 12Km)
 
-The registration process consists of 5 steps:
+Enter personal details
 
-Step 1: Select distance
+Choose payment method
 
-Step 2: Enter personal information
+Review & confirm
 
-Step 3: Choose payment method
+Get QR code (for event access)
 
-Step 4: Review and confirm
+Admin Panel
+Access: /admin (Default: admin/admin)
 
-Step 5: Registration complete with QR code
+Features:
 
-Admin Features
-Access the admin panel at /admin (default credentials: admin/admin)
-
-View all registrations
-
-Filter by payment status
+View & filter registrations
 
 Export participant data
 
-Manage payment methods
+Manage payments
 
 Troubleshooting
 Common Issues
-QR codes not generating:
+🔹 QR codes not generating?
 
-Ensure assets/qrcodes directory exists and is writable
+Ensure assets/qrcodes is writable.
 
-Verify PHP GD library is installed
+Check if PHP GD Library is installed.
 
-Database connection errors:
+🔹 Database connection errors?
 
-Double-check credentials in config/config.php
+Verify credentials in config/config.php.
 
-Verify MySQL server is running
+Ensure MySQL is running.
 
-Session errors:
+🔹 Session errors?
 
-Ensure session_start() is called before any output
+Confirm session_start() is called before output.
 
-Check PHP session save path is writable
+Check PHP session directory permissions.
 
 Security Recommendations
-Change default admin credentials
 
-Set proper file permissions:
+🔒 Change default admin credentials
+
+🔒 Set proper file permissions:
 
 bash
 chmod 644 config/config.php
-Implement HTTPS for production
 
-Regularly backup the database
+🔒 Use HTTPS in production
+
+🔒 Regularly backup the database
 
 License
-This project is proprietary software developed by JohnDev404. All rights reserved.
+
+⚠️ Proprietary Software © JohnDev404. All rights reserved.
 
 Support
-For technical support, please contact:
 
-Email: installersph@gmail.com
+📧 Email: installersph@gmail.com
 
-Phone: +63 09481870374
+📞 Phone/Viber: +639618856615
 
+🌐 Facebook: InstallersPH
+
+🔗 Website: https://installersph.com
+
+Notes
+For large events, optimize MySQL settings.
+
+Test payment gateways thoroughly before production.

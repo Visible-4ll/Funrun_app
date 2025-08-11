@@ -26,7 +26,7 @@ h1 {
 }
 
 h2 {
-    color: #3498db;
+    color: #2e3290;
     margin: 25px 0 15px;
 }
 
@@ -47,7 +47,7 @@ h2 {
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    border-left: 4px solid #3498db;
+    border-left: 4px solid #2e3290;
 }
 
 .report-card:hover {
@@ -64,7 +64,7 @@ h2 {
 .report-number {
     font-size: 2rem;
     font-weight: bold;
-    color: #3498db;
+    color: #2e3290;
     margin: 10px 0 5px;
 }
 
@@ -100,7 +100,7 @@ h2 {
 .export-btn {
     display: inline-block;
     padding: 12px 25px;
-    background-color: #3498db;
+    background-color: #2e3290;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -112,7 +112,7 @@ h2 {
 }
 
 .export-btn:hover {
-    background-color: #2980b9;
+    background-color: #2e3290;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -7,10 +7,10 @@ $isLocal = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']);
 // Define base URL
 if ($isLocal) {
     // Local IP so phones on same Wi-Fi can access it
-    $base_url = "http://10.0.16.46:80/funrunapplication/"; // <-- Replace with your actual local IP
+    $base_url = "http://localhost/funrunapplication/"; // <-- Replace with your actual local IP
 } else {
     // Production (live)
-    $base_url = "https://10.0.16.46:80/funrunapplication/"; // <-- Replace with your live URL
+    $base_url = "https://localhost/funrunapplication/"; // <-- Replace with your live URL
 }
 ?>
 // Update this to your actual base URL

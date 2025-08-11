@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS participants (
     qr_code_path VARCHAR(255),
     payment_status ENUM('Paid', 'Unpaid') DEFAULT 'Unpaid',
     transaction_number VARCHAR(50) DEFAULT NULL,
-
+     `price` decimal(10,2) NOT NULL DEFAULT 0.00
 );
 
 -- Create payment methods table

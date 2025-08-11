@@ -1,10 +1,7 @@
-
-
 <div class="admin-header">
-  <h1>Running Event</h1>
+  <img src="assets/img/installersph.png" alt="Logo" class="logo">
   <button class="burger" onclick="toggleMenu()">☰</button>
-  <script src="assets/js/togglemenu.js"></script>
-  <link rel="stylesheet" href="assets/css/admin_header.css">
+
   <nav class="admin-nav" id="adminNav">
     <ul>
       <li><a href="admin_dashboard.php">Dashboard</a></li>
@@ -17,3 +14,5 @@
   </nav>
 </div>
 
+<link rel="stylesheet" href="assets/css/admin_header.css">
+<script src="assets/js/togglemenu.js"></script>

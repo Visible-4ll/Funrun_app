@@ -1,5 +1,5 @@
 .bdy{
-    background-color: azure;
+    background-color: white;
 }
 
 .btn-primary{
@@ -14,4 +14,7 @@
     color: white;
     border: none;
     font-weight: bold;
+}
+.btn-success:hover{
+    background-color: #0d0d7a;
 }
