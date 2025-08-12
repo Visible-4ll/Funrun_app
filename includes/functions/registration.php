@@ -103,6 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'DISTANCE' => $participant['distance'],
                     ], JSON_UNESCAPED_UNICODE);
 
+                    
+
                     require_once 'phpqrcode/qrlib.php';
                     $qrCodePath = 'assets/qrcodes/' . $registrationId . '.png';
                     QRcode::png($qrContent, $qrCodePath);
@@ -138,3 +140,4 @@ try {
     die("Error loading payment methods: " . $e->getMessage());
 }
 ?>
+

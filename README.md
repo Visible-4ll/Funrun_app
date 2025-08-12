@@ -115,9 +115,14 @@ Confirm session_start() is called before output.
 Check PHP session directory permissions.
 
 Security Recommendations
+<<<<<<< HEAD
 
 🔒 Change default admin credentials
 
+=======
+🔒 Change default admin credentials
+
+>>>>>>> 69636ec01af932a64b79809a5e041b754c29d22a
 🔒 Set proper file permissions:
 
 bash
@@ -136,6 +141,18 @@ Support
 📧 Email: installersph@gmail.com
 
 📞 Phone/Viber: +639618856615
+<<<<<<< HEAD
+=======
+
+🌐 Facebook: InstallersPH
+
+🔗 Website: https://installersph.com
+
+Notes
+For large events, optimize MySQL settings.
+
+Test payment gateways thoroughly before production.
+>>>>>>> 69636ec01af932a64b79809a5e041b754c29d22a
 
 🌐 Facebook: InstallersPH
 

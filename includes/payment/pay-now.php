@@ -72,6 +72,10 @@ if (isset($_GET['txn'])) {
     .card {
         border-radius: 20px;
         background-color: #fff;
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         border: none;
     }
 
