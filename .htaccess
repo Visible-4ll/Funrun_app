@@ -1,0 +1,23 @@
+# Prevent directory listing
+Options -Indexes
+
+# Prevent access to sensitive files
+<FilesMatch "\.(env|log|htaccess|htpasswd|ini|phps|fla|psd|log|sh|sqlite|db)$">
+    Require all denied
+</FilesMatch>
+
+# Protect against XSS
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header always append X-Frame-Options SAMEORIGIN
+    Header set X-Content-Type-Options nosniff
+</IfModule>
+
+# URL Rewriting
+RewriteEngine On
+RewriteBase /event-registration/
+
+# Front controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

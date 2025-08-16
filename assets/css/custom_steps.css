@@ -1,0 +1,190 @@
+/* Custom styles that extend Bootstrap */
+:root {
+    --custom-dark-blue: #1E1EBA;
+    --custom-lime-green: #d2e902;
+}
+body{
+    font-family: '', sans-serif;
+}
+
+
+.progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    background-color: var(--bs-gray-800); /* Using Bootstrap's color variable */
+}
+.btn-dark{
+    background-color: var(--custom-dark-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Active step styling */
+.progress-step.active {
+    opacity: 1;
+    background-color: var(--custom-lime-green) !important;
+}
+.bg-success{
+    background-color: var(--custom-lime-green) !important;
+
+}
+.bg-primary{
+    background-color: var(--custom-dark-blue) !important;
+}
+.btn-primary{
+    background-color: var(--custom-dark-blue) !important;
+    border-color: var(--custom-dark-blue) !important;
+}
+.btn-primary:hover{
+    background-color: var(--custom-dark-blue) !important;
+    border-color: var(--custom-dark-blue) !important;
+}
+.btn-outline-primary{
+    color: var(--custom-dark-blue) !important;
+    border-color: var(--custom-dark-blue) !important;
+}
+.btn-outline-primary:hover{
+    background-color: var(--custom-dark-blue) !important;
+    color: #fff !important;
+    border-color: var(--custom-dark-blue) !important;
+}
+/* Completed step styling */
+.progress-step.completed {
+    background-color: var(--custom-dark-blue);
+}
+#btn{
+   background-color: var(--custom-dark-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+.payment-option{
+    background-color: var(--custom-dark-blue);
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.payment-option:hover {
+    background-color: blue;
+}
+
+/* Form element transitions */
+.distance-btn, 
+.payment-option,
+.form-control,
+.form-select {
+    transition: all 0.3s ease;
+}
+
+/* Step container handling */
+.registration-step {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.registration-step.active {
+    display: block;
+}
+
+/* Logo styling */
+#logo_event {
+    display: block;
+    margin: 0 auto 1.5rem;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Custom color classes */
+.bg-dark-gray {
+    background-color: #333;
+}
+
+
+/* Animation for step transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .progress-step {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* custom for tshirt size*/
+.shirt-size-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    max-width: 500px;
+    min-height: 300px;
+    font-family: 'Arial', sans-serif;
+    margin: auto;
+}
+
+.shirt-option {
+    background-image: url('../img/shirts.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.85);
+    position: relative;
+    font-weight: 500;
+    text-align: center;
+    min-height: 150px;
+    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.shirt-option:hover {
+    border-color: #007bff;
+    background-color: #ffffff;
+    transform: scale(1.02);
+}
+
+.shirt-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.label-content {
+    font-weight: bold;
+    background-color: rgba(255,255,255,0.7);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+}
+
+.size-description {
+    display: none;
+    font-size: 0.85rem;
+    color: #333;
+    background-color: rgba(255,255,255,0.8);
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    transition: opacity 0.3s ease;
+}
